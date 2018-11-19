@@ -1,0 +1,27 @@
+{% extends 'vbloge/base.html' %}
+{% load staticfiles %}
+{% block title %}{{ category.name }}{% endblock %}
+{% block body %}
+    {% if category %}
+        {% if articles %}
+            <h1>Articles of <i>{{ category.name }}</i> category</h1>
+            <ul>
+                {% for article in articles %}
+                    <li>
+                        <a href="{% url 'show_article' category.slug article.slug %}">
+                            {{ article.title }}
+                        </a><br>
+                        <i>by {{ article.author }}</i>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            There's no article yet
+        {% endif %}
+    {% else %}
+        Such category is not found
+    {% endif %}
+    {% if user.is_authenticated %}
+        <div><a href="{% url 'add_article' category.slug %}">Add new article</a></div>
+    {% endif %}
+{% endblock %}

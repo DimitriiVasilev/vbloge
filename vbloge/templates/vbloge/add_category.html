@@ -1,0 +1,16 @@
+{% extends 'vbloge/base.html' %}
+{% load staticfiles %}
+{% block title %}Add category{% endblock %}
+{% block body %}
+    <h1>Creating new category</h1>
+    {% if errors %}
+        {{ errors }}
+    {% endif %}
+    {% if form %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit">
+        </form>
+    {% endif %}
+{% endblock %}

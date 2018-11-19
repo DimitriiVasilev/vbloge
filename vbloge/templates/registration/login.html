@@ -1,0 +1,19 @@
+{% extends 'vbloge/base.html' %}
+{% load staticfiles %}
+{% block title %}Logging in{% endblock %}
+{% block body %}
+    {% if form.errors %}
+        <p>Your username and password don't match. Please try again.</p>
+    {% endif %}
+
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div>Username: {{ form.username }}</div>
+        <div>Password: {{ form.password }}</div>
+        <div>
+            <input type="submit">
+            <input type="hidden" name="next" value="{{ next }}">
+        </div>
+    </form>
+    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+{% endblock %}

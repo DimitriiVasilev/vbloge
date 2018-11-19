@@ -1,0 +1,22 @@
+{% extends 'vbloge/base.html' %}
+{% load staticfiles %}
+{% block title %}My profile{% endblock %}
+{% block body %}
+    <h1>My profile</h1>
+    name: {{ user.username }}<br>
+    mail: {{ user.email }}<br>
+    {% if user.profile.picture %}
+        <img src="{{ MEDIA_URL }}{{ user.profile.picture.url }}" alt="profile photo">
+    {% endif %}
+    <div>Articles posted:</div>
+    {% if articles %}
+        <ul>
+        {% for article in articles %}
+            <li><a href="{% url 'show_article' article.category.slug article.slug %}">{{ article.title }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <div>You haven't posted any articles yet</div>
+    {% endif %}
+    <div><a href="{% url 'password_reset' %}">Change password</a></div>
+{% endblock %}

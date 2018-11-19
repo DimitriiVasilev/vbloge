@@ -1,0 +1,27 @@
+{% extends 'vbloge/base.html' %}
+{% load staticfiles %}
+{% block title %}{{ article.title }}{% endblock %}
+{% block body %}
+    {% if article %}
+        <h1>{{ article.title }}</h1>
+        <p>{{ article.content }}</p>
+        <p><i>was published at {{ article.publish_date }} by {{ article.author }}</i></p>
+        <div>
+        {% if comments %}
+            <ul>
+            {% for comment in comments %}
+                <li>
+                    {{ comment.content }}<br>
+                    <i>by {{ comment.author }}</i>
+                </li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+        <div>
+            <a href="{% url 'add_comment' category.slug article.slug %}">Live a comment</a>
+        </div>
+    {% else %}
+        There's no such article
+    {% endif %}
+{% endblock %}

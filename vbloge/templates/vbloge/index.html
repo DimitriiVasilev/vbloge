@@ -1,0 +1,25 @@
+{% extends 'vbloge/base.html' %}
+{% load staticfiles %}
+{% block title %}Home{% endblock %}
+{% block body %}
+    <h1>Categories</h1>
+    {% if user.is_authenticated %}
+        <h1>Hi, {{ user.username }}</h1>
+    {% else %}
+        <h1>Hi, anonymous</h1>
+    {% endif %}
+
+    {% if categories %}
+        <ul>
+            {% for category in categories %}
+                <li><a href="{% url 'show_category' category.slug %}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        There's no category yet
+    {% endif %}
+    {% if user.is_authenticated %}
+        <a href="{% url 'add_category' %}">Add category</a>
+
+    {% endif %}
+{% endblock %}

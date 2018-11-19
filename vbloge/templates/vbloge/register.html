@@ -1,0 +1,16 @@
+{% extends 'vbloge/base.html' %}
+{% load staticfiles %}
+{% block title %}Registration{% endblock %}
+{% block body %}
+    {% if registered %}
+        Thanks for registering
+    {% else %}
+        <h1>Registration</h1>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+            <input type="submit">
+        </form>
+    {% endif %}
+{% endblock %}
