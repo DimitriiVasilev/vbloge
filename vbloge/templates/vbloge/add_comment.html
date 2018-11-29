@@ -3,17 +3,17 @@
 {% block title %}Add comment{% endblock %}
 {% block body %}
     {% if article %}
-    <h1>
-        Leave a comment below
-        <a href="{% url 'show_article' article.category.slug article.slug %}">
-            {{ article.title }}
-        </a>
-    </h1>
+        <h1>
+            Leave a comment below
+            <a href="{% url 'show_article' article.category.slug article.slug %}">
+                {{ article.title }}
+            </a>
+        </h1>
     {% else %}
         <h1>There's no such article</h1>
     {% endif %}
     {% if errors %}
-        {{ errors }}
+        <div class="alert-danger">{{ errors }}</div>
     {% endif %}
     {% if form %}
         <form method="POST">

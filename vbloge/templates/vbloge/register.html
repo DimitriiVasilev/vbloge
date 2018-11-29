@@ -3,8 +3,11 @@
 {% block title %}Registration{% endblock %}
 {% block body %}
     {% if registered %}
-        Thanks for registering
+        <div class="alert alert-success">Thanks for registering</div>
     {% else %}
+        {% if errors %}
+            <div class="alert-danger">{{ errors }}</div>
+        {% endif %}
         <h1>Registration</h1>
         <form method="POST" action="" enctype="multipart/form-data">
             {% csrf_token %}

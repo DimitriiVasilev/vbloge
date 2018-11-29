@@ -4,24 +4,36 @@
 {% block body %}
     {% if category %}
         {% if articles %}
-            <h1>Articles of <i>{{ category.name }}</i> category</h1>
-            <ul>
-                {% for article in articles %}
-                    <li>
-                        <a href="{% url 'show_article' category.slug article.slug %}">
-                            {{ article.title }}
-                        </a><br>
-                        <i>by {{ article.author }}</i>
-                    </li>
-                {% endfor %}
-            </ul>
+            <div class="container">
+                <div class="page-header"><h1>Articles in <i>{{ category.name }}</i> category</h1></div>
+            </div>
+            <div class="container">
+                <ul>
+                    {% for article in articles %}
+                        <li>
+                            <a href="{% url 'show_article' category.slug article.slug %}">
+                                {{ article.title }}
+                            </a><br>
+                            <i>by {{ article.author }}</i>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         {% else %}
-            There's no article yet
+            <div class="container">
+                <div class="page-header">
+                    There's no article yet
+                </div>
+            </div>
         {% endif %}
     {% else %}
-        Such category is not found
+        <div class="container">
+            Such category is not found
+        </div>
     {% endif %}
     {% if user.is_authenticated %}
-        <div><a href="{% url 'add_article' category.slug %}">Add new article</a></div>
+        <div class="container">
+            <a class="btn btn-primary" href="{% url 'add_article' category.slug %}">Add a new article</a>
+        </div>
     {% endif %}
 {% endblock %}

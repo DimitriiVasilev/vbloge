@@ -4,7 +4,7 @@
 {% block body %}
     <h1>Creating new category</h1>
     {% if errors %}
-        {{ errors }}
+        <div class="alert-danger">{{ errors }}</div>
     {% endif %}
     {% if form %}
         <form method="POST">

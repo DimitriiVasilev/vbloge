@@ -3,25 +3,30 @@
 {% block title %}{{ article.title }}{% endblock %}
 {% block body %}
     {% if article %}
-        <h1>{{ article.title }}</h1>
-        <p>{{ article.content }}</p>
-        <p><i>was published at {{ article.publish_date }} by {{ article.author }}</i></p>
-        <div>
-        {% if comments %}
-            <ul>
-            {% for comment in comments %}
-                <li>
-                    {{ comment.content }}<br>
-                    <i>by {{ comment.author }}</i>
-                </li>
-            {% endfor %}
-            </ul>
-        {% endif %}
+        <div class="container">
+            <div class="page-header"><h1>{{ article.title }}</h1></div>
         </div>
-        <div>
-            <a href="{% url 'add_comment' category.slug article.slug %}">Live a comment</a>
+        <div class="container">
+            <blockquote>
+                {{ article.content }}
+                <footer>was published at {{ article.publish_date }} by {{ article.author }}</footer>
+            </blockquote>
+        </div>
+        <div class="container">
+            {% if comments %}
+                <div class="container"><h3>Comments:</h3></div>
+                {% for comment in comments %}
+                    <blockquote>
+                        {{ comment.content }}
+                        <footer>by {{ comment.author }}</footer>
+                    </blockquote>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="container">
+            <a class="btn btn-primary" href="{% url 'add_comment' category.slug article.slug %}">Live a comment</a>
         </div>
     {% else %}
-        There's no such article
+        <div class="container">There's no such article</div>
     {% endif %}
 {% endblock %}

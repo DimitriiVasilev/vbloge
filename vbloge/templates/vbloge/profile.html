@@ -2,21 +2,38 @@
 {% load staticfiles %}
 {% block title %}My profile{% endblock %}
 {% block body %}
-    <h1>My profile</h1>
-    name: {{ user.username }}<br>
-    mail: {{ user.email }}<br>
+    <div class="container">
+        <div class="page-header"><h1>My profile</h1></div>
+    </div>
+    <div class="container">
+        <dl>
+            <dt>Username:</dt>
+            <dd>{{ user.username }}</dd>
+            <dt>mail:</dt>
+            <dd>{{ user.email }}</dd>
+        </dl>
+    </div>
     {% if user.profile.picture %}
-        <img src="{{ MEDIA_URL }}{{ user.profile.picture.url }}" alt="profile photo">
+        <div class="container">
+            <img src="{{ MEDIA_URL }}{{ user.profile.picture.url }}" class="img-thumbnail img-responsive"
+                 alt="profile photo" width="15%" height="15%">
+        </div>
     {% endif %}
-    <div>Articles posted:</div>
-    {% if articles %}
-        <ul>
-        {% for article in articles %}
-            <li><a href="{% url 'show_article' article.category.slug article.slug %}">{{ article.title }}</a></li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <div>You haven't posted any articles yet</div>
-    {% endif %}
-    <div><a href="{% url 'password_reset' %}">Change password</a></div>
+    <div class="container">
+        {% if articles %}
+            <p>Articles posted:</p>
+            <ul>
+                {% for article in articles %}
+                    <li>
+                        <a href="{% url 'show_article' article.category.slug article.slug %}">
+                            {{ article.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-warning">You haven't posted any articles yet</p>
+        {% endif %}
+    </div>
+    <div class="container"><a class="btn btn-primary" href="{% url 'password_reset' %}">Change password</a></div>
 {% endblock %}
